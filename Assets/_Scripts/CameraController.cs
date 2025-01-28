@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     {
         _camera = Camera.main;
         currentOrientation = Screen.orientation;
+        MoveCamera();
     }
 
     private void Update()
@@ -26,17 +27,18 @@ public class CameraController : MonoBehaviour
             SwitchOrientation();
         }
         
-        // if (currentOrientation != Screen.orientation)
-        // {
-        //     MoveCamera();
-        // }
+        if (currentOrientation != Screen.orientation)
+        {
+            MoveCamera();
+            currentOrientation = Screen.orientation;
+        }
     }
 
     public void MoveCamera()
     {
-        _camera.transform.position = MainCanvas.GetComponent<RectTransform>().rect.width > MainCanvas.GetComponent<RectTransform>().rect.height ? 
-            _forHorizontalPos.position : 
-            _forVerticalPos.position;
+        _camera.transform.position = Screen.orientation == ScreenOrientation.Portrait ? 
+            _forVerticalPos.position : 
+            _forHorizontalPos.position;
     }
 
     public void SwitchOrientation()
