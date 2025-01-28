@@ -3,6 +3,7 @@ using UnityEngine;
 public class TowerSetup : MonoBehaviour
 {
     [SerializeField] private Peg[] pegs;
+    [SerializeField] private Peg[] _targetPegs;
     [SerializeField] private Ring[] ringPrefabs;
     [SerializeField] private Transform ringSpawnPoint;
     
@@ -10,6 +11,48 @@ public class TowerSetup : MonoBehaviour
     {
         ClearRings();
         SpawnRings(config.ringColors, config.ringIDs, config.startState);
+        SpawnTarget(config.ringColors, config.ringIDs, config.targetSequences);
+    }
+
+    private void SpawnTarget(Color[] colors, int[] ringIDs, IntListWrapper[] targetSequences)
+    {
+        if (colors == null || targetSequences == null)
+        {
+            Debug.LogError("Invalid input data for SpawnRings");
+            return;
+        }
+
+        for (int i = 0; i < targetSequences.Length; i++)
+        {
+            if (targetSequences[i] == null)
+                continue;
+
+            for (int j = 0; j < targetSequences[i].sequence.Count; j++)
+            {
+                Ring newRing = Instantiate(ringPrefabs[0], ringSpawnPoint.position, Quaternion.identity);
+                newRing.transform.localScale = new Vector3(
+                    ringPrefabs[0].transform.localScale.x / 2f,
+                    ringPrefabs[0].transform.localScale.y,
+                    ringPrefabs[0].transform.localScale.z / 2f);
+                newRing.Initialize(targetSequences[i].sequence[j]);
+                newRing.SetColor(colors[targetSequences[i].sequence[j]]);
+                
+                int pegIndex = i;
+                if (pegIndex < 0 || pegIndex >= _targetPegs.Length)
+                {
+                    Debug.LogError($"Invalid peg index: {pegIndex}");
+                    continue;
+                }
+
+                Peg targetPeg = _targetPegs[pegIndex];
+                targetPeg.AddRing(newRing);
+                PositionRingOnPeg(newRing, targetPeg);
+                newRing.transform.parent = targetPeg.transform;
+                newRing.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+
+        
     }
 
     private void SpawnRings(Color[] colors, int[] ringIDs, int[] startPositions)
@@ -54,6 +97,11 @@ public class TowerSetup : MonoBehaviour
     private void ClearRings()
     {
         foreach (Peg peg in pegs)
+        {
+            peg.ClearRings();
+        }
+        
+        foreach (Peg peg in _targetPegs)
         {
             peg.ClearRings();
         }

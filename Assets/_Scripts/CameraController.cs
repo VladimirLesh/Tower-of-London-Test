@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Canvas MainCanvas;
     [SerializeField] private float _speed;
     [SerializeField] private Transform _forVerticalPos, _forHorizontalPos;
+    [SerializeField] private Target _target;
     
     private Camera _camera;
     private ScreenOrientation currentOrientation;
@@ -26,7 +27,7 @@ public class CameraController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(1))
         {
-            SwitchOrientation();
+            // SwitchOrientation();
         }
         
         if (currentOrientation != Screen.orientation)
@@ -41,15 +42,13 @@ public class CameraController : MonoBehaviour
         if (Screen.orientation == ScreenOrientation.Portrait)
         {
             _camera.transform.DOMove(_forVerticalPos.position, _speed);
+            _target.transform.DOMove(_forVerticalPos.position - _target.GetVerticalOffset(), _speed);
         }
         else
         {
             _camera.transform.DOMove(_forHorizontalPos.position, _speed);
+            _target.transform.DOMove(_forHorizontalPos.position - _target.GetHorizontalOffset(), _speed);
         }
-        
-        // _camera.transform.position = Screen.orientation == ScreenOrientation.Portrait ? 
-        //      _forVerticalPos.position : 
-        //     _forHorizontalPos.position;
     }
 
     public void SwitchOrientation()
@@ -57,10 +56,14 @@ public class CameraController : MonoBehaviour
         if (_isSwitch)
         {
             _camera.transform.DOMove(_forVerticalPos.position, _speed);
+            _target.transform.DOMove(_forVerticalPos.position - _target.GetVerticalOffset(), _speed);
+
         }
         else
         {
             _camera.transform.DOMove(_forHorizontalPos.position, _speed);
+            _target.transform.DOMove(_forHorizontalPos.position - _target.GetHorizontalOffset(), _speed);
+
         }
         
         _isSwitch = !_isSwitch;

@@ -8,6 +8,6 @@ public class LevelConfig : ScriptableObject
     public int maxMoves;
     public int[] ringIDs;
     public Color[] ringColors;
-    public int[] startState; // Индексы колонн для стартовой позиции
+    public int[] startState;
     public IntListWrapper[] targetSequences;
 }

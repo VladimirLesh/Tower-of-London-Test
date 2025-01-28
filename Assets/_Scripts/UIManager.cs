@@ -1,8 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -14,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _failScreen;
     [SerializeField] private GameObject _loginScreen;
+    [SerializeField] private GameObject _targetObjects;
 
     [SerializeField] private Button _winButton;
     [SerializeField] private Button _loseButton;
@@ -110,4 +108,7 @@ public class UIManager : MonoBehaviour
             _hud.SetActive(false);
         }
     }
+    
+    public void ShowTargetObjects() => _targetObjects.SetActive(true);
+    public void HideTargetObjects() => _targetObjects.SetActive(false);
 }

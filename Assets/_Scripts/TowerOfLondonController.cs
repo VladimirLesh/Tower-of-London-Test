@@ -42,6 +42,7 @@ public class TowerOfLondonController : MonoBehaviour
         uiManager.HideFailScreen();
         uiManager.HideLoginScreen();
         uiManager.ShowHUD();
+        uiManager.ShowTargetObjects();
         loadLevel(currentLevel);
         
         _soundController.SetPitch(1f);
@@ -53,6 +54,7 @@ public class TowerOfLondonController : MonoBehaviour
         uiManager.HideFailScreen();
         uiManager.HideLoginScreen();
         uiManager.ShowHUD();
+        uiManager.ShowTargetObjects();
         loadLevel(currentLevel + 1);
         
         _soundController.SetPitch(1f);
@@ -166,6 +168,7 @@ public class TowerOfLondonController : MonoBehaviour
         {
             SaveGameResult();
             uiManager.HideHUD();
+            uiManager.HideTargetObjects();
             uiManager.ShowWinScreen();
         }
         isInteractable = false;
@@ -176,6 +179,7 @@ public class TowerOfLondonController : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.HideHUD();
+            uiManager.HideTargetObjects();
             uiManager.ShowFailScreen();
             _soundController.SetPitch(0.5f);
         }
