@@ -11,6 +11,7 @@ public class TowerOfLondonController : MonoBehaviour
     [SerializeField] private TowerSetup towerSetup;
     [SerializeField] private LevelConfig[] levels;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private SoundController _soundController;
 
     [Header("Settings")]
     [SerializeField] private float ringMoveSpeed = 5f;
@@ -42,6 +43,8 @@ public class TowerOfLondonController : MonoBehaviour
         uiManager.HideLoginScreen();
         uiManager.ShowHUD();
         loadLevel(currentLevel);
+        
+        _soundController.SetPitch(1f);
     }
     
     public void LoadNextLevel()
@@ -51,6 +54,8 @@ public class TowerOfLondonController : MonoBehaviour
         uiManager.HideLoginScreen();
         uiManager.ShowHUD();
         loadLevel(currentLevel + 1);
+        
+        _soundController.SetPitch(1f);
     }
 
     private void loadLevel(int levelIndex)
@@ -170,6 +175,7 @@ public class TowerOfLondonController : MonoBehaviour
         {
             uiManager.HideHUD();
             uiManager.ShowFailScreen();
+            _soundController.SetPitch(0.5f);
         }
         isInteractable = false;
     }

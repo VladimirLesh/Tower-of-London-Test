@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   ringCount: 3
-  maxMoves: 10
+  maxMoves: 1
   ringIDs: 000000000100000002000000
   ringColors:
   - {r: 0, g: 1, b: 0.0066018105, a: 0}
