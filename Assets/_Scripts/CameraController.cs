@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Canvas MainCanvas;
+    [SerializeField] private float _speed;
     [SerializeField] private Transform _forVerticalPos, _forHorizontalPos;
     
     private Camera _camera;
@@ -34,22 +36,31 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void MoveCamera()
+    private void MoveCamera()
     {
-        _camera.transform.position = Screen.orientation == ScreenOrientation.Portrait ? 
-            _forVerticalPos.position : 
-            _forHorizontalPos.position;
+        if (Screen.orientation == ScreenOrientation.Portrait)
+        {
+            _camera.transform.DOMove(_forVerticalPos.position, _speed);
+        }
+        else
+        {
+            _camera.transform.DOMove(_forHorizontalPos.position, _speed);
+        }
+        
+        // _camera.transform.position = Screen.orientation == ScreenOrientation.Portrait ? 
+        //      _forVerticalPos.position : 
+        //     _forHorizontalPos.position;
     }
 
     public void SwitchOrientation()
     {
         if (_isSwitch)
         {
-            _camera.transform.position = _forHorizontalPos.position;
+            _camera.transform.DOMove(_forVerticalPos.position, _speed);
         }
         else
         {
-            _camera.transform.position = _forVerticalPos.position;
+            _camera.transform.DOMove(_forHorizontalPos.position, _speed);
         }
         
         _isSwitch = !_isSwitch;

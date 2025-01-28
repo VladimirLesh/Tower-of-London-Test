@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   ringCount: 3
-  maxMoves: 1
+  maxMoves: 7
   ringIDs: 000000000100000002000000
   ringColors:
   - {r: 0, g: 1, b: 0.0066018105, a: 0}
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 0, g: 0.7173228, b: 1, a: 0}
-  startState: 010000000100000001000000
+  startState: 000000000000000000000000
   targetSequences:
   - sequence: 020000000100000000000000

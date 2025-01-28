@@ -7,10 +7,12 @@ public class RingInteraction : MonoBehaviour
     
     private Ring selectedRing;
     private Camera mainCamera;
+    
 
     private void Start()
     {
         mainCamera = Camera.main;
+        
     }
 
     private void Update()
@@ -28,10 +30,16 @@ public class RingInteraction : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hit, maxPickDistance, ringLayer))
         {
             var ring = hit.collider.GetComponent<Ring>();
+            
             if(ring != null && ring.IsTopRing())
             {
                 selectedRing = ring;
+                ring.PlayClick();
                 // HighlightValidPegs();
+            }
+            else
+            {
+                SoundController.Instance.PlayError();
             }
         }
         else if(selectedRing != null)
@@ -48,7 +56,12 @@ public class RingInteraction : MonoBehaviour
             var peg = hit.collider.GetComponent<Peg>();
             if(peg != null)
             {
+                SoundController.Instance.PlayMove();
                 TowerOfLondonController.Instance.OnRingSelected(selectedRing, peg);
+            }
+            else
+            {
+                SoundController.Instance.PlayError();
             }
         }
         selectedRing = null;

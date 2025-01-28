@@ -107,6 +107,8 @@ public class TowerOfLondonController : MonoBehaviour
 
     private IEnumerator PerformMoveAnimation(Ring ring, Peg targetPeg)
     {
+        _soundController.PlayMove();
+        
         Peg currentPeg = ring.CurrentPeg;
         currentPeg.RemoveTopRing();
         Vector3 startPosition = ring.transform.position;
