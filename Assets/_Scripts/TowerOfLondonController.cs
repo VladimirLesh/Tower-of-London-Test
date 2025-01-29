@@ -31,10 +31,8 @@ public class TowerOfLondonController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        uiManager.ShowLoginScreen();
-        uiManager.HideTargetObjects();
+    private void Start() {
+        uiManager.Init();
     }
 
     public void LoadLevel()

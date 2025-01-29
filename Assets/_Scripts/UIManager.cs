@@ -13,22 +13,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _loginScreen;
     [SerializeField] private GameObject _targetObjects;
 
+    [Header("Buttons")]
     [SerializeField] private Button _winButton;
     [SerializeField] private Button _loseButton;
     [SerializeField] private Button _nextLevelButton;
+    [SerializeField] private Button _repeatButton;
     
     [SerializeField] private StatisticsUI _statisticsUI;
 
     private void Start()
     {
-        HideHUD();
-        HideFailScreen();
-        HideWinScreen();
-        ShowLoginScreen();
-        
         _winButton.onClick.AddListener(TowerOfLondonController.Instance.LoadLevel);
         _loseButton.onClick.AddListener(TowerOfLondonController.Instance.LoadLevel);
         _nextLevelButton.onClick.AddListener(TowerOfLondonController.Instance.LoadNextLevel);
+        _repeatButton.onClick.AddListener(TowerOfLondonController.Instance.LoadLevel);
     }
 
     private void OnDestroy()
@@ -36,6 +34,16 @@ public class UIManager : MonoBehaviour
         _winButton.onClick.RemoveAllListeners();
         _loseButton.onClick.RemoveAllListeners();
         _nextLevelButton.onClick.RemoveAllListeners();
+        _repeatButton.onClick.RemoveAllListeners();
+    }
+    
+    public void Init()
+    {
+        HideHUD();
+        HideFailScreen();
+        HideWinScreen();
+        ShowLoginScreen();
+        HideTargetObjects();
     }
 
     public void UpdateMoves(int moves)
