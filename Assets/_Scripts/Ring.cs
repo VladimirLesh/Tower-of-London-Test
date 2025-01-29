@@ -4,8 +4,8 @@ using UnityEngine;
 public class Ring : MonoBehaviour
 {
     public int RingID { get; private set; }
-    [SerializeField] private float height = 0.5f;
-    [SerializeField] private float scaleFactor = 1.2f;
+    [SerializeField] private float height;
+    [SerializeField] private float scaleFactor;
     private int size;
     private Color color;
     private Material material;
@@ -57,4 +57,6 @@ public class Ring : MonoBehaviour
     }
     
     public void PlayClick() => audioSource.Play();
+    
+    public void SetHeight(float newHeight) => height = newHeight;
 }

@@ -4312,6 +4312,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 0320bf10835965047888fe75d358e1ef, type: 2}
   - {fileID: 11400000, guid: e113cc9ad95e62841ac9b5eddcfc5d74, type: 2}
+  - {fileID: 11400000, guid: 5ed6b14b0ad3705488652a1822f96038, type: 2}
   uiManager: {fileID: 1796083163}
   _soundController: {fileID: 1250067556}
   ringMoveSpeed: 5

@@ -34,6 +34,7 @@ public class TowerOfLondonController : MonoBehaviour
     private void Start()
     {
         uiManager.ShowLoginScreen();
+        uiManager.HideTargetObjects();
     }
 
     public void LoadLevel()
@@ -188,7 +189,7 @@ public class TowerOfLondonController : MonoBehaviour
     
     private void SaveGameResult()
     {
-        string playerName = PlayerPrefs.GetString("Username", "Unknown");
+        string playerName = PlayerPrefs.GetString("Username", "");
         float time = Time.time - _startTime;
 
         GameStatistics.Instance.SaveGameResult(playerName, currentLevel, levels[currentLevel].maxMoves - movesLeft, time);

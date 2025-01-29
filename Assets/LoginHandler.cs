@@ -11,7 +11,7 @@ public class LoginHandler : MonoBehaviour
 
     private void Start()
     {
-        var name = PlayerPrefs.GetString("Username", "Unknown");
+        var name = PlayerPrefs.GetString("Username", "");
         _inputField.text = name;
         _playButton.onClick.AddListener(checkCanPlay);
     }

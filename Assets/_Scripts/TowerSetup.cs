@@ -30,9 +30,10 @@ public class TowerSetup : MonoBehaviour
             for (int j = 0; j < targetSequences[i].sequence.Count; j++)
             {
                 Ring newRing = Instantiate(ringPrefabs[0], ringSpawnPoint.position, Quaternion.identity);
+                newRing.SetHeight(newRing.Height / 2f);
                 newRing.transform.localScale = new Vector3(
                     ringPrefabs[0].transform.localScale.x / 2f,
-                    ringPrefabs[0].transform.localScale.y,
+                    ringPrefabs[0].transform.localScale.y / 2f,
                     ringPrefabs[0].transform.localScale.z / 2f);
                 newRing.Initialize(targetSequences[i].sequence[j]);
                 newRing.SetColor(colors[targetSequences[i].sequence[j]]);
@@ -51,8 +52,6 @@ public class TowerSetup : MonoBehaviour
                 newRing.gameObject.layer = LayerMask.NameToLayer("Default");
             }
         }
-
-        
     }
 
     private void SpawnRings(Color[] colors, int[] ringIDs, int[] startPositions)
